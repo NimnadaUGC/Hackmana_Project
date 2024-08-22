@@ -1,0 +1,166 @@
+-- Insert data into DeviceUser table
+INSERT INTO DeviceUser (userNIC, name, title, gmail) VALUES 
+('123456789V', 'John Doe', 'Engineer', 'johndoe@gmail.com'),
+('987654321V', 'Jane Smith', 'Manager', 'janesmith@gmail.com'),
+('192837465V', 'Alice Brown', 'Technician', 'aliceb@gmail.com'),
+('564738291V', 'Bob White', 'Administrator', 'bobwhite@gmail.com'),
+('847362910V', 'Charlie Green', 'Support Staff', 'charlieg@gmail.com');
+
+-- Insert data into Monitor table
+INSERT INTO Monitor (MonitorRegNum, model, screenSize, status, purchasedFrom) VALUES 
+('MON123456789', 'Dell UltraSharp U2719D', '27 inches', 'Active', 'Best Buy'),
+('MON987654321', 'ASUS VG248QE', '24 inches', 'Active', 'Amazon'),
+('MON112233445', 'Samsung Odyssey G9', '49 inches', 'Inactive', 'Samsung Store'),
+('MON998877665', 'LG 34WN80C-B', '34 inches', 'Active', 'Newegg'),
+('MON223344556', 'Acer Predator X34', '34 inches', 'Active', 'Micro Center');
+
+-- Insert data into Speaker table
+INSERT INTO Speaker (SpeakerRegNum, model, purchasedFrom, status) VALUES 
+('SPEAKER123456', 'Logitech Z623', 'Best Buy', 'Active'),
+('SPEAKER987654', 'Bose Companion 2 Series III', 'Amazon', 'Active'),
+('SPEAKER111222', 'Sony SRS-XB43', 'Sony Store', 'Inactive'),
+('SPEAKER333444', 'JBL Charge 4', 'Best Buy', 'Active'),
+('SPEAKER555666', 'Klipsch R-51PM', 'Newegg', 'Active');
+
+-- Insert data into Mouse table
+INSERT INTO Mouse (mouseRegNum, model, status, purchasedFrom, Connectivity) VALUES 
+('MOUSE123456789', 'Logitech MX Master 3', 'Active', 'Best Buy', 'Wireless'),
+('MOUSE987654321', 'Razer DeathAdder Elite', 'Active', 'Amazon', 'Wired'),
+('MOUSE112233445', 'SteelSeries Rival 600', 'Active', 'Newegg', 'Wired'),
+('MOUSE998877665', 'Apple Magic Mouse 2', 'Inactive', 'Apple Store', 'Wireless'),
+('MOUSE223344556', 'Microsoft Surface Mouse', 'Active', 'Microsoft Store', 'Wireless');
+
+-- Insert data into Keyboard table
+INSERT INTO Keyboard (KeyboardRegNum, model, status, purchasedFrom, connectivity) VALUES 
+('KEYBOARD123456', 'Corsair K95 RGB Platinum', 'Active', 'Best Buy', 'Wired'),
+('KEYBOARD987654', 'Logitech G Pro X', 'Active', 'Amazon', 'Wireless'),
+('KEYBOARD112233', 'Razer BlackWidow Elite', 'Active', 'Newegg', 'Wired'),
+('KEYBOARD334455', 'Apple Magic Keyboard', 'Inactive', 'Apple Store', 'Wireless'),
+('KEYBOARD556677', 'Microsoft Sculpt Ergonomic Keyboard', 'Active', 'Microsoft Store', 'Wireless');
+
+-- Insert data into Mic table
+INSERT INTO Mic (MICRegNum, model, purchasedFrom, status) VALUES 
+('MIC123456789', 'Blue Yeti', 'Best Buy', 'Active'),
+('MIC987654321', 'Rode NT-USB', 'Amazon', 'Active'),
+('MIC112233445', 'Shure SM7B', 'Guitar Center', 'Active'),
+('MIC998877665', 'Audio-Technica AT2020', 'Amazon', 'Inactive'),
+('MIC223344556', 'Samson Q2U', 'Best Buy', 'Active');
+
+-- Insert data into Scanners table
+INSERT INTO Scanners (ScannersRegNum, model, purchasedFrom, status) VALUES 
+('SCANNER123456', 'Epson Perfection V600', 'Best Buy', 'Active'),
+('SCANNER987654', 'Canon CanoScan LiDE 400', 'Amazon', 'Active'),
+('SCANNER111222', 'Fujitsu ScanSnap iX1500', 'Newegg', 'Inactive'),
+('SCANNER333444', 'Brother ADS-2200', 'Office Depot', 'Active'),
+('SCANNER555666', 'Xerox DocuMate 3125', 'Amazon', 'Active');
+
+-- Insert data into Printer table
+INSERT INTO Printer (PrinterRegNum, model, status, serialNum, purchasedFrom, paperInput, paperOutput) VALUES 
+('PRINTER123456', 'HP LaserJet Pro M404dn', 'Active', 'CNB5M3214V', 'Best Buy', '250 sheets', '150 sheets'),
+('PRINTER987654', 'Epson EcoTank ET-4760', 'Active', 'SRF9T819VZ', 'Amazon', '250 sheets', '30 sheets'),
+('PRINTER112233', 'Brother HL-L2350DW', 'Inactive', 'BRT9T819VZ', 'Office Depot', '250 sheets', '100 sheets'),
+('PRINTER334455', 'Canon PIXMA G6020', 'Active', 'CAN5M3214V', 'Best Buy', '100 sheets', '50 sheets'),
+('PRINTER556677', 'Samsung Xpress M2070FW', 'Active', 'SAM6M3214V', 'Samsung Store', '150 sheets', '50 sheets');
+
+-- Insert data into Ups table
+INSERT INTO Ups (UpsRegNum, model, status, purchasedFrom) VALUES 
+('UPS123456789', 'APC Back-UPS Pro 1500VA', 'Active', 'Best Buy'),
+('UPS987654321', 'CyberPower CP1500AVRLCD', 'Active', 'Amazon'),
+('UPS112233445', 'Eaton 5P1500RC', 'Active', 'Newegg'),
+('UPS998877665', 'Tripp Lite SMART1500LCD', 'Inactive', 'Tripp Lite Store'),
+('UPS223344556', 'Vertiv Liebert GXT5', 'Active', 'Micro Center');
+
+-- Insert data into PowerSupply table
+INSERT INTO PowerSupply (PowerSupplyRegNum, model, purchasedFrom, status) VALUES 
+('PSU123456789', 'Corsair RM750x', 'Best Buy', 'Active'),
+('PSU987654321', 'EVGA SuperNOVA 750 G3', 'Amazon', 'Active'),
+('PSU112233445', 'Seasonic Focus Plus 850', 'Newegg', 'Active'),
+('PSU998877665', 'Thermaltake Smart RGB 700W', 'Inactive', 'Thermaltake Store'),
+('PSU223344556', 'Cooler Master MWE Gold 650', 'Micro Center', 'Active');
+
+-- Insert data into Desktop table
+INSERT INTO Desktop (DesRegNum, model, status, serialNum, purchasedFrom, ram, processor, hardDisk, os, floppyDisk, soundCard, tvCard, networkCard, ssd, cdRom, monitorRegNum, SpeakerRegNum, mouseRegNum, keyboardRegNum, micRegNum, scannerRegNum, printerRegNum, upsRegNum, powerSupplyRegNum, userNIC) VALUES 
+('DESKTOP123456', 'Dell XPS 8930', 'Active', 'DPC5L3214V', 'Best Buy', '16GB DDR4', 'Intel Core i7-9700', '1TB HDD', 'Windows 10', 'No', 'Realtek ALC3861', 'No', 'No', 'No', 'No', 'MON123456789', 'SPEAKER123456', 'MOUSE123456789', 'KEYBOARD123456', 'MIC123456789', 'SCANNER123456', 'PRINTER123456', 'UPS123456789', 'PSU123456789', '123456789V'),
+('DESKTOP987654', 'HP Pavilion Desktop TP01-1026', 'Active', 'HPAB5M3214V', 'Amazon', '8GB DDR4', 'Intel Core i3-10100', '256GB SSD + 1TB HDD', 'Windows 10', 'No', 'Realtek ALC3601', 'No', 'No', 'No', 'No', 'MON987654321', 'SPEAKER987654', 'MOUSE987654321', 'KEYBOARD987654', 'MIC987654321', 'SCANNER987654', 'PRINTER987654', 'UPS987654321', 'PSU987654321', '987654321V'),
+('DESKTOP112233', 'Acer Aspire TC-885-UA92', 'Inactive', 'ACER5L3214V', 'Newegg', '12GB DDR4', 'Intel Core i5-9400', '512GB SSD', 'Windows 10', 'No', 'Realtek ALC887', 'No', 'No', 'No', 'No', 'MON112233445', 'SPEAKER111222', 'MOUSE112233445', 'KEYBOARD112233', 'MIC112233445', 'SCANNER111222', 'PRINTER112233', 'UPS112233445', 'PSU112233445', '192837465V');
+
+-- Insert data into Laptop table
+INSERT INTO Laptop (LaptopRegNum, model, status, ram, processor, hardDisk, os, purchasedFrom, mouseRegNum, keyboardRegNum, userNIC) VALUES 
+('LAPTOP123456', 'Apple MacBook Pro 13-inch', 'Active', '16GB DDR4', 'Apple M1', '512GB SSD', 'macOS', 'Best Buy', 'MOUSE123456789', 'KEYBOARD123456', '123456789V'),
+('LAPTOP987654', 'Dell XPS 15 9500', 'Active', '32GB DDR4', 'Intel Core i7-10750H', '1TB SSD', 'Windows 10', 'Amazon', 'MOUSE987654321', 'KEYBOARD987654', '987654321V'),
+('LAPTOP112233', 'HP Spectre x360', 'Inactive', '8GB DDR4', 'Intel Core i5-1135G7', '256GB SSD', 'Windows 10', 'Newegg', 'MOUSE112233445', 'KEYBOARD112233', '192837465V'),
+('LAPTOP334455', 'Lenovo ThinkPad X1 Carbon', 'Active', '16GB DDR4', 'Intel Core i7-8665U', '512GB SSD', 'Windows 10', 'Lenovo Store', 'MOUSE998877665', 'KEYBOARD334455', '564738291V'),
+('LAPTOP556677', 'Microsoft Surface Laptop 3', 'Active', '16GB DDR4', 'AMD Ryzen 7 3780U', '512GB SSD', 'Windows 10', 'Microsoft Store', 'MOUSE223344556', 'KEYBOARD556677', '847362910V');
+
+-- Insert data into PhotoCopyMachine table
+INSERT INTO PhotoCopyMachine (PhotoCopyMachineRegNum, model, status, purchasedFrom) VALUES 
+('PHOTOCOPY123', 'Canon imageCLASS MF743Cdw', 'Active', 'Best Buy'),
+('PHOTOCOPY987', 'HP LaserJet Pro MFP M428fdw', 'Active', 'Amazon'),
+('PHOTOCOPY111', 'Brother MFC-L8900CDW', 'Inactive', 'Office Depot'),
+('PHOTOCOPY333', 'Xerox WorkCentre 6515', 'Active', 'Newegg'),
+('PHOTOCOPY555', 'Epson WorkForce Pro WF-4740', 'Active', 'Best Buy');
+
+-- Insert data into MultimediaProjector table
+INSERT INTO MultimediaProjector (MultimediaProjectorRegNum, purchasedFrom, model, status) VALUES 
+('PROJECTOR123', 'Best Buy', 'Epson Home Cinema 2150', 'Active'),
+('PROJECTOR987', 'Amazon', 'BenQ HT2050A', 'Active'),
+('PROJECTOR111', 'Office Depot', 'Optoma HD146X', 'Inactive'),
+('PROJECTOR333', 'Newegg', 'LG PF50KA', 'Active'),
+('PROJECTOR555', 'Micro Center', 'ViewSonic PX701HD', 'Active');
+
+-- Insert data into FaxMachine table
+INSERT INTO FaxMachine (FaxMachineRegNum, purchasedFrom, model, status) VALUES 
+('FAX123456789', 'Best Buy', 'Brother FAX-2840', 'Active'),
+('FAX987654321', 'Amazon', 'Canon FAXPHONE L100', 'Active'),
+('FAX112233445', 'Office Depot', 'Panasonic KX-FL421', 'Inactive'),
+('FAX998877665', 'Newegg', 'HP OfficeJet 3830', 'Active'),
+('FAX223344556', 'Micro Center', 'Samsung SF-760P', 'Active');
+
+-- Insert data into WebCam table
+INSERT INTO WebCam (WebCamRegNum, model, purchasedFrom, status) VALUES 
+('WEBCAM123456', 'Logitech C920S', 'Best Buy', 'Active'),
+('WEBCAM987654', 'Razer Kiyo', 'Amazon', 'Active'),
+('WEBCAM112233', 'Microsoft LifeCam HD-3000', 'Office Depot', 'Inactive'),
+('WEBCAM334455', 'Logitech Brio', 'Newegg', 'Active'),
+('WEBCAM556677', 'Aukey PC-LM1E', 'Amazon', 'Active');
+
+-- Insert data into Tripod table
+INSERT INTO Tripod (TripodRegNum, model, status, purchasedFrom, AdjustableHeight) VALUES 
+('TRIPOD123456', 'AmazonBasics 60-Inch Lightweight Tripod', 'Active', 'Best Buy', 'Yes'),
+('TRIPOD987654', 'Manfrotto MT190X3 Aluminum Tripod', 'Active', 'Amazon', 'Yes'),
+('TRIPOD112233', 'Joby GorillaPod 3K Kit', 'Inactive', 'Office Depot', 'No'),
+('TRIPOD334455', 'Neewer Carbon Fiber 66 inches', 'Active', 'Newegg', 'Yes'),
+('TRIPOD556677', 'Zomei Z818 65 inches', 'Active', 'Micro Center', 'Yes');
+
+-- Insert data into Headphone table
+INSERT INTO Headphone (HeadphoneRegNum, model, status, purchasedFrom, Connectivity) VALUES 
+('HEADPHONE12345', 'Sony WH-1000XM4', 'Active', 'Best Buy', 'Wireless'),
+('HEADPHONE98765', 'Bose QuietComfort 35 II', 'Active', 'Amazon', 'Wireless'),
+('HEADPHONE11122', 'Sennheiser HD 450BT', 'Inactive', 'Newegg', 'Wireless'),
+('HEADPHONE33344', 'Audio-Technica ATH-M50x', 'Active', 'Guitar Center', 'Wired'),
+('HEADPHONE55566', 'JBL E55BT', 'Active', 'Best Buy', 'Wireless');
+
+-- Insert data into USBHub table
+INSERT INTO USBHub (USBHubRegNum, model, purchasedFrom, status) VALUES 
+('USBHUB123456', 'Anker 10-Port USB Data Hub', 'Best Buy', 'Active'),
+('USBHUB987654', 'Sabrent 4-Port USB 3.0 Hub', 'Amazon', 'Active'),
+('USBHUB112233', 'AUKEY USB C Hub Adapter', 'Newegg', 'Inactive'),
+('USBHUB334455', 'VAVA USB C Hub 8-in-1', 'Office Depot', 'Active'),
+('USBHUB556677', 'HyperDrive 6-in-1 USB-C Hub', 'Micro Center', 'Active');
+
+-- Insert data into notes table
+INSERT INTO notes (id, username, notes, createdate, title) VALUES 
+('1', 'john_doe', 'Meeting agenda', '2024-05-18', 'Team Meeting'),
+('2', 'jane_smith', 'Project update', '2024-05-18', 'Project XYZ'),
+('3', 'alice_brown', 'Research summary', '2024-05-19', 'Project Alpha'),
+('4', 'bob_white', 'System setup instructions', '2024-05-19', 'System Installation'),
+('5', 'charlie_green', 'Inventory list', '2024-05-20', 'Warehouse Stock');
+
+-- Insert data into systemUser table
+INSERT INTO systemUser (userName, fullName, post, empId, pwd, email, phoneNum, isRemember, verification_code, code_expiry) VALUES 
+('john_doe', 'John Doe', 'Engineer', 'EMP123', SHA1('password123'), 'johndoe@example.com', '1234567890', 0, NULL, NULL),
+('jane_smith', 'Jane Smith', 'Manager', 'EMP456', SHA1('password456'), 'janesmith@example.com', '0987654321', 0, NULL, NULL),
+('alice_brown', 'Alice Brown', 'Technician', 'EMP789', SHA1('password789'), 'alicebrown@example.com', '1122334455', 0, NULL, NULL),
+('bob_white', 'Bob White', 'Administrator', 'EMP101', SHA1('password101'), 'bobwhite@example.com', '2233445566', 0, NULL, NULL),
+('charlie_green', 'Charlie Green', 'Support Staff', 'EMP202', SHA1('password202'), 'charliegreen@example.com', '3344556677', 0, NULL, NULL);
+

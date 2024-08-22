@@ -127,9 +127,11 @@ public class LoginPageController implements Initializable {
         Scene scene = new Scene(root);
 
         Screen screen = Screen.getPrimary();
-        double width = screen.getBounds().getWidth();
-        double height = screen.getBounds().getHeight();
+        double width = screen.getBounds().getWidth()-100;
+        double height = screen.getBounds().getHeight()-100;
 
+        stage.setResizable(true);
+        dashboardController.setWindowStage(stage);
         stage.setWidth(width);
         stage.setHeight(height);
 
@@ -137,7 +139,6 @@ public class LoginPageController implements Initializable {
         stage.setY(0.0);
         stage.setScene(scene);
         stage.show();
-        System.out.println("Login successful");
     }
     public String getLogedUser(){
         return logedUser;
