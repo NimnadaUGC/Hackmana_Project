@@ -124,7 +124,12 @@ public class PathFinderController extends VBox implements Initializable {
         sceneStack.push(bckBtnScene);
         currentScene=bckBtnScene;
     }
-
+    public void popSceneStack(){
+        sceneStack.pop();
+    }
+    public void printSceneStack(){
+        System.out.println(Arrays.toString(sceneStack.toArray()));
+    }
     @FXML
     public void goBack(ActionEvent event) throws IOException {
         setPathTxt("");

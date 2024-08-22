@@ -30,6 +30,8 @@ public class DevDetailedViewController implements Initializable {
     private OtherDevicesController otherDevicesController=OtherDevicesController.getInstance();
     private PathFinderController dashboardPathFinderControllerD=PathFinderController.getInstance();
     private String devName;
+    private boolean loadFromQuick;
+
 
     //Device details common
     @FXML
@@ -317,6 +319,12 @@ public class DevDetailedViewController implements Initializable {
     }
     public void setOtherDevCat(String otherDevCat) {
         this.otherDevCat = otherDevCat;
+    }
+    public boolean isLoadFromQuick() {
+        return loadFromQuick;
+    }
+    public void setLoadFromQuick(boolean loadFromQuick) {
+        this.loadFromQuick = loadFromQuick;
     }
 
     //populate choice boxes (input choice boxes,output choice boxes,ups,power supply)
@@ -703,13 +711,18 @@ public class DevDetailedViewController implements Initializable {
 
                 }
             }
-            //TODO create a method for direct DeviceMngmntSmmryScene and call it in here
+            if(isLoadFromQuick()){
+                setLoadFromQuick(false);
+                regNumTextField.setText("");
+                modelTextField.setText("");
+                StatusChoiceBox.setValue("");
 
-            DeviceCategoryCardController deviceCategoryCardController=new DeviceCategoryCardController();
-            deviceCategoryCardController.setDevName(deviceSelector);
-            deviceCategoryCardController.setDashboardPathFinderControllerD(getDashboardPathFinderControllerD());
-            deviceCategoryCardController.callDeviceInfo();
-            OtherDevicesController.getInstance().tableViewRefresh();
+                reset();
+            }else{
+                getDashboardPathFinderControllerD().popSceneStack();
+                getDashboardPathFinderControllerD().goBack(e);
+            }
+
         } else {
             alert.close();
         }

@@ -607,7 +607,6 @@ public class AddDeviceDialogController implements Initializable {
             otherErrorLogger.info("/"+newInstance.getLogedUser() + "/add a device  "+"/Device RegNumber:"+getDevRegNum()+""+", Brand:"+newValues.get(0)+",Status:"+newValues.get(1)+"/"+getDevRegNum()+"/"+newInstance.getLogedUser()+"/"+getDevCategoryName());
             alert(Alert.AlertType.INFORMATION,"Success","Successfully inserted new device \n"+newValues);
             resetBtnAction();
-            setDevCat();
         }
         if(isFromComponent) {
             DeviceMngmntSmmryScene.getInstance().updateUI();//when device added update ui

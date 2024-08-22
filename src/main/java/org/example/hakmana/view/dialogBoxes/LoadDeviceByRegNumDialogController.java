@@ -12,6 +12,7 @@ import org.apache.logging.log4j.core.Logger;
 import org.example.hakmana.model.DatabaseConnection;
 import org.example.hakmana.model.otherDevices.OtherDevices;
 import org.example.hakmana.view.component.DeviceInfoCardController;
+import org.example.hakmana.view.component.NavPanelController;
 import org.example.hakmana.view.component.PathFinderController;
 import org.example.hakmana.view.scene.DevDetailedViewController;
 
@@ -68,7 +69,6 @@ public class LoadDeviceByRegNumDialogController implements Initializable {
         });
 
     }
-
 
     public static ScrollPane getDashboardBodyScrollpane() {
         return dashboardBodyScrollpane;
@@ -200,9 +200,11 @@ public class LoadDeviceByRegNumDialogController implements Initializable {
                 throw new RuntimeException(e);
             }
             //setters
+            devDetailedViewController.setLoadFromQuick(true);
             devDetailedViewController.setDeviceSelector(selDevForScene);
             devDetailedViewController.setDevRegNum(getSelectedDevRegNum());
             devDetailedViewController.showDeviceDetail();
+
 
     }
 

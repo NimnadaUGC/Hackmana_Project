@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -33,6 +34,7 @@ import org.example.hakmana.view.dialogBoxes.AddDeviceDialogController;
 import org.example.hakmana.view.dialogBoxes.AddDeviceUserDialogController;
 import org.example.hakmana.view.dialogBoxes.AddNoteDialogPane;
 import org.example.hakmana.view.dialogBoxes.LoadDeviceByRegNumDialogController;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,6 +51,7 @@ import java.util.*;
 public class DashboardController extends Component implements Initializable {
     private static final Logger otherErrorLogger = (Logger) LogManager.getLogger(DashboardController.class);
     private static DashboardController instance = null;
+    private static Stage windowStage;
     @FXML
     public HeaderController headerController;//header custom component injector
     @FXML
@@ -173,19 +176,45 @@ public class DashboardController extends Component implements Initializable {
         pathFinderController.setNavPanelControllerPath(navPanelController);
         pathFinderController.setSearchBarVisible(false);
         pathFinderController.setBckBtnScene("dashboard");
-
-
+//
+//        Stage windowStage = (Stage) node.getScene().getWindow();
+//        windowStage.widthProperty().addListener(((observable, oldValue, newValue) -> {
+//            double oldStageWidth=oldValue.doubleValue();
+//            double newStageWidth=newValue.doubleValue();
+//            if(oldStageWidth>newStageWidth) {
+//                //116
+//                System.out.println(getBodyComponet().getWidth());
+//                //getBodyComponet().setFillWidth(true);
+//                System.out.println("collapse");
+//                System.out.println(getBodyComponet().getWidth());
+//            }
+//            else {
+//                System.out.println(getBodyComponet().getWidth());
+//                System.out.println("expand");
+//                // getBodyComponet().setFillWidth(true);
+//                System.out.println(getBodyComponet().getWidth());
+//            }
+//        }));
         //create the event listener to the navigation panel ToggleButton() method
-        navPanelController.collapseStateProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                expand();
-            } else {
-                collapse();
-            }
-        });
+//        navPanelController.collapseStateProperty().addListener((observable, oldValue, newValue) -> {
+//            if (newValue) {
+//                expand();
+//            } else {
+//                collapse();
+//            }
+//        });
         tableAdd();
         addDataOfDevice();
 
+
+    }
+
+    public VBox getBodyComponet() {
+        return bodyComponet;
+    }
+
+    public void setWindowStage(Stage windowStage) {
+        DashboardController.windowStage = windowStage;
 
     }
 
@@ -354,30 +383,29 @@ public class DashboardController extends Component implements Initializable {
     }
 
     /*+++++++++++++++++++++++++++++Animations++++++++++++++++++++++++++++++++++++++*/
-    private void Animation(double animStartPos, double animEndPos) {
-        //Animation object refernce
-        TranslateTransition bodyExpand = new TranslateTransition(Duration.millis(300), bodyComponet);
-        bodyExpand.setFromX(animStartPos);
-        bodyExpand.setToX(animEndPos); // expand VBox
-        bodyExpand.setAutoReverse(true);
-        bodyExpand.play();
-
-    }
-
-    public void expand() {
-        ///String cssRule = "-fx-min-width: 992px;";
-        Double W1 = bodyComponet.getWidth() + 244;
-        Animation(0, -244);
-        bodyComponet.setMinWidth(W1);
-        //bodyComponet.getStyleClass().add(cssRule);
-
-    }
-
-    public void collapse() {
-        Double W1 = bodyComponet.getWidth() - 244;
-        Animation(-244, 0);
-        bodyComponet.setMinWidth(W1);
-    }
+//    private void Animation(double animStartPos, double animEndPos) {
+//        //Animation object refernce
+//        TranslateTransition bodyExpand = new TranslateTransition(Duration.millis(300), bodyComponet);
+//        bodyExpand.setFromX(animStartPos);
+//        bodyExpand.setToX(animEndPos); // expand VBox
+//        bodyExpand.setAutoReverse(true);
+//        bodyExpand.play();
+//
+//    }
+//
+//    public void expand() {
+//        double W1 = bodyComponet.getWidth() + 244;
+//        Animation(0, -244);
+//        bodyComponet.setFillWidth(true);
+//        //bodyComponet.setMinWidth(W1);
+//    }
+//
+//    public void collapse() {
+//        double W1 = bodyComponet.getWidth() - 244;
+//        Animation(-244, 0);
+//        bodyComponet.setFillWidth(true);
+//        //bodyComponet.setMinWidth(W1);
+//    }
 
     /*+++++++++++++++++++++++++++++Device adding dialog pane++++++++++++++++++++++++++++++++++++++*/
     public void addDeviceBtnDialogOpen(ActionEvent event) throws IOException {
