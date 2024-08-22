@@ -34,7 +34,7 @@
 
                 <!--Path Component-->
                 <PathFinderController fx:id="pathFinderController" prefWidth="770.0" />
-                <AnchorPane style="-fx-background-color: yelllow;" VBox.vgrow="ALWAYS">
+                <AnchorPane  VBox.vgrow="ALWAYS">
                     <VBox.margin>
                         <Insets left="27.0" />
                     </VBox.margin>
