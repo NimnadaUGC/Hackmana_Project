@@ -29,7 +29,7 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Button fx:id="toggleButton" maxHeight="36.0" maxWidth="32.0" mnemonicParsing="false" onAction="#ToggleButton" prefHeight="36.0" prefWidth="0.0" styleClass="buttonWorkStyle">
+            <Button disable="true" maxHeight="36.0" maxWidth="32.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="0.0" styleClass="buttonWorkStyle" visible="false">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
                      <Image url="@Images/arrow.png" />
@@ -139,7 +139,7 @@
          <String fx:value="topvbox" />
          <String fx:value="collapsedVbox" />
       </styleClass>
-      <Button maxHeight="32.0" maxWidth="32.0" mnemonicParsing="false" onAction="#ToggleButton" prefHeight="24.0" prefWidth="24.0" VBox.vgrow="NEVER">
+      <Button maxHeight="32.0" maxWidth="32.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" visible="false" VBox.vgrow="NEVER">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <Image url="@Images/icon-align-justify.png" />

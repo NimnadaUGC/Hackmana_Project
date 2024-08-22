@@ -22,7 +22,7 @@
             <TextField fx:id="deviceId" layoutX="333.0" layoutY="137.0" prefHeight="25.0" prefWidth="197.0" />
             <TextField fx:id="username" layoutX="333.0" layoutY="214.0" prefHeight="25.0" prefWidth="201.0" />
             <TextArea fx:id="note" layoutX="7.0" layoutY="106.0" prefHeight="203.0" prefWidth="301.0" />
-            <Button fx:id="addNote" layoutX="19.0" layoutY="313.0" mnemonicParsing="false" onAction="#createnote" styleClass="bttn" text="ADD Note" />
+            <Button fx:id="addNote" layoutX="19.0" layoutY="313.0" mnemonicParsing="false" onAction="#createnote" styleClass="bttn" text="Add Note" />
             <Button fx:id="editButton" layoutX="20.0" layoutY="313.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="93.0" styleClass="bttn" text="Edit" />
             <Button fx:id="updateButton" layoutX="125.0" layoutY="313.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="92.0" styleClass="bttn" text="update" />
          </children>

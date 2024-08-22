@@ -39,8 +39,8 @@ public class NavPanelController extends AnchorPane implements Initializable {
     private AnchorPane sidebar; // injector to sidebar container
     @FXML
     private VBox collapsedNavBar;//injector to sidebar for after collapse
-    @FXML
-    private Button toggleButton; // injector to toggle button
+//    @FXML
+//    private Button toggleButton; // injector to toggle button
     private boolean isCollapsed = true;
     private double sidebarWidth;
 
@@ -74,7 +74,7 @@ public class NavPanelController extends AnchorPane implements Initializable {
 
 
     /*-------variable set the navigation panel collapse state ------*/
-    private final BooleanProperty collapseState=new SimpleBooleanProperty(false);
+//    private final BooleanProperty collapseState=new SimpleBooleanProperty(false);
 
     /*---------Override the initialize method in Initializable interface--------*/
     @Override
@@ -100,15 +100,15 @@ public class NavPanelController extends AnchorPane implements Initializable {
     }
 
     /*--------------Getters---------------*/
-    public boolean isTest() {
-        return collapseState.get();
-    }
-    public BooleanProperty collapseStateProperty() {
-        return collapseState;
-    }
-    public Button getToggleButton() {
-        return toggleButton;
-    }
+//    public boolean isTest() {
+//        return collapseState.get();
+//    }
+//    public BooleanProperty collapseStateProperty() {
+//        return collapseState;
+//    }
+//    public Button getToggleButton() {
+//        return toggleButton;
+//    }
     public ScrollPane getDashboardBodyScrollpane() {
         return dashboardBodyScrollpane;
     }
@@ -148,36 +148,36 @@ public class NavPanelController extends AnchorPane implements Initializable {
 
     /*--------------Navigation panel animations-------------*/
     //Define translation of the navigation panel
-    private void Animation(double animStartPos,double animEndPos){
-        //Animation object reference
-        TranslateTransition animationCollapse = new TranslateTransition(Duration.millis(300), sidebar);
-        animationCollapse.setFromX(animStartPos);
-        animationCollapse.setToX(animEndPos); // Hide sidebar initially
-        animationCollapse.setAutoReverse(true);
-        animationCollapse.play();
-    }
-
-    //collapse button Event handling function
-    @FXML
-    public void ToggleButton(ActionEvent event) {
-        if(isCollapsed) {
-            Animation(0,-sidebarWidth);
-            vbox1.setVisible(false);
-            vbox2.setVisible(false);
-            vbox3.setVisible(false);
-            collapsedNavBar.setVisible(true);
-            collapseState.set(true);
-        }
-        else{
-            Animation(-sidebarWidth,0);
-            collapsedNavBar.setVisible(false);
-            vbox1.setVisible(true);
-            vbox2.setVisible(true);
-            vbox3.setVisible(true);
-            collapseState.set(false);
-        }
-        isCollapsed = !isCollapsed;
-    }
+//    private void Animation(double animStartPos,double animEndPos){
+//        //Animation object reference
+//        TranslateTransition animationCollapse = new TranslateTransition(Duration.millis(300), sidebar);
+//        animationCollapse.setFromX(animStartPos);
+//        animationCollapse.setToX(animEndPos); // Hide sidebar initially
+//        animationCollapse.setAutoReverse(true);
+//        animationCollapse.play();
+//    }
+//
+//    //collapse button Event handling function
+//    @FXML
+//    public void ToggleButton(ActionEvent event) {
+//        if(isCollapsed) {
+//            Animation(0,-sidebarWidth);
+//            vbox1.setVisible(false);
+//            vbox2.setVisible(false);
+//            vbox3.setVisible(false);
+//            collapsedNavBar.setVisible(true);
+//            collapseState.set(true);
+//        }
+//        else{
+//            Animation(-sidebarWidth,0);
+//            collapsedNavBar.setVisible(false);
+//            vbox1.setVisible(true);
+//            vbox2.setVisible(true);
+//            vbox3.setVisible(true);
+//            collapseState.set(false);
+//        }
+//        isCollapsed = !isCollapsed;
+//    }
 
     public void deviceMnagmnt(){
             FXMLLoader vboxLoader =new FXMLLoader(DeviceMngmntController.class.getResource("DeviceMngmnt.fxml"));

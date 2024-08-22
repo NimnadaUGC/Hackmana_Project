@@ -24,9 +24,7 @@ public class SystemUser {
     private DatabaseConnection databaseConnection;
     private Connection conn;
     private ResultSet rs;
-
-    private OAuth2ForGmail auth;
-
+  //  private OAuth2ForGmail auth;
     private boolean checkCode;
     private String userName;
     private String fullName;
@@ -174,7 +172,8 @@ public class SystemUser {
     }
     //send verification code to the email
     public void sendEmail(String verificationCode) throws Exception {
-        auth=new OAuth2ForGmail();
+      //  auth=new OAuth2ForGmail();
+
 
         String fromEmail = "hakmanamathara2@gmail.com"; // sender email
         Properties props = new Properties();
@@ -203,7 +202,7 @@ public class SystemUser {
 
         email.setText(emailBody);
 
-         auth.sendMail(email);
+        // auth.sendMail(email);
 
     }
     //check verification with the db

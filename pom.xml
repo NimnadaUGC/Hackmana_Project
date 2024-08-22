@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>hakmana</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.5</version>
     <name>hakmana</name>
 
     <properties>
@@ -107,13 +107,12 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.itextpdf/itext7-core -->
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>itext7-core</artifactId>
-            <version>LATEST</version>
-            <type>pom</type>
-        </dependency>
-
+       <dependency>
+                  <groupId>com.itextpdf</groupId>
+                  <artifactId>itext7-core</artifactId>
+                  <version>LATEST</version>
+                  <type>pom</type>
+          </dependency>
 
     </dependencies>
 

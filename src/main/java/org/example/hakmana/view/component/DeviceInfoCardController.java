@@ -216,7 +216,7 @@ public class DeviceInfoCardController extends AnchorPane implements Initializabl
           detailDeviceVboxLoder.setController(devDetailedViewController);
           getDashboardPathFinderControllerDD().setPathTxt("Device Management>"+getDeviceCat()+">"+getDevId());
           getDashboardPathFinderControllerDD().setBckBtnScene("DevDetailedView");
-
+          devDetailedViewController.setOtherDevCat(getDeviceCat());
           try{
              VBox vbox=detailDeviceVboxLoder.load();
              getDashboardBodyScrollpaneDD().setContent(vbox);//this scollpane id knows only that controller file
@@ -228,7 +228,10 @@ public class DeviceInfoCardController extends AnchorPane implements Initializabl
           //setters
           devDetailedViewController.setDeviceSelector(getDeviceCat());
           devDetailedViewController.setDevRegNum(getDevId());
+          devDetailedViewController.setDashboardPathFinderControllerD(getDashboardPathFinderControllerDD());
           devDetailedViewController.showDeviceDetail();
+
+
      }
 
      //note adding dialog box

@@ -38,6 +38,8 @@ public class OverviewController implements Initializable {
     @FXML
     TableColumn<LogEntry, String> detailsColumn;
     @FXML
+    TableColumn<LogEntry,String> userColumn;
+    @FXML
     private ChoiceBox<String> users;
     @FXML
     private ChoiceBox<String> devIds;
@@ -159,6 +161,7 @@ public class OverviewController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<LogEntry, String>("timestamp"));
         processColumn.setCellValueFactory(new PropertyValueFactory<LogEntry, String>("process"));
         detailsColumn.setCellValueFactory(new PropertyValueFactory<LogEntry, String>("details"));
+        userColumn.setCellValueFactory(new PropertyValueFactory<LogEntry,String>("user"));
         historyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         historyTable.setItems(list);
     }

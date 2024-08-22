@@ -28,17 +28,17 @@
             <!-- Navigation panel Component-->
             <NavPanelController fx:id="navPanelController" HBox.hgrow="NEVER" />
 
-            <VBox fx:id="bodyComponet" prefHeight="217.0" prefWidth="748.0" HBox.hgrow="ALWAYS">
+            <VBox fx:id="bodyComponet" HBox.hgrow="ALWAYS">
                 <!--Header Component-->
                 <HeaderController fx:id="headerController" prefHeight="109.0" prefWidth="770.0" VBox.vgrow="NEVER" />
 
                 <!--Path Component-->
                 <PathFinderController fx:id="pathFinderController" prefWidth="770.0" />
-                <AnchorPane style="-fx-background-color: yelllow;" VBox.vgrow="ALWAYS">
+                <AnchorPane  VBox.vgrow="ALWAYS">
                     <VBox.margin>
                         <Insets left="27.0" />
                     </VBox.margin>
-                    <ScrollPane fx:id="bodyScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutY="0.8000030517578125" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="0.0">
+                    <ScrollPane fx:id="bodyScrollPane" fitToWidth="true" layoutY="0.8000030517578125" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="0.0">
                         <VBox prefHeight="567.0" prefWidth="875.0" spacing="10.0" stylesheets="@CSS/dashboard.css">
                             <padding>
                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -47,7 +47,7 @@
                                 <children>
                                     <TableView fx:id="table2" prefHeight="140.0" HBox.hgrow="ALWAYS">
                                         <columns>
-                                            <TableColumn fx:id="totalCol" editable="false" prefWidth="475.0" sortable="false" text="DeviceName" />
+                                            <TableColumn fx:id="totalCol" editable="false" prefWidth="475.0" sortable="false" text="Device Category" />
                                             <TableColumn fx:id="activeCol" editable="false" prefWidth="150.0" sortable="false" text="Active" />
                                             <TableColumn fx:id="inActiveCol" editable="false" prefWidth="150.0" sortable="false" text="Inactive" />
                                             <TableColumn fx:id="repairingCol" editable="false" prefWidth="150.0" sortable="false" text="Repairing" />
@@ -86,7 +86,7 @@
                                            <TableView fx:id="table1" prefWidth="300.0">
                                                <columns>
                                                    <TableColumn fx:id="col1" editable="false" prefWidth="195.0" sortable="false" text="Device Id" />
-                                                   <TableColumn fx:id="col2" editable="false" prefWidth="500.0" sortable="false" text="title" />
+                                                   <TableColumn fx:id="col2" editable="false" prefWidth="500.0" sortable="false" text="Title" />
                                                    <TableColumn fx:id="col3" editable="false" prefWidth="200.0" sortType="DESCENDING" text="Date" />
                                                </columns>
                                            </TableView>
@@ -161,7 +161,7 @@
                                        <Font size="8.0" />
                                     </font>
                                             </JFXButton>
-                                            <JFXButton fx:id="MadinDeviceViewBtn" onAction="#showDevice" style="-fx-padding: 2 5 2 5;" styleClass="Button" text="Main device view &#10;">
+                                            <JFXButton fx:id="MadinDeviceViewBtn" onAction="#mainDeviceQuickAccess" style="-fx-padding: 2 5 2 5;" styleClass="Button" text="Main device view &#10;">
                                                 <graphic>
                                                     <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                                         <Image url="@Images/icon-check-circle.png" />
@@ -171,7 +171,7 @@
                                        <Font size="8.0" />
                                     </font>
                                             </JFXButton>
-                                            <JFXButton fx:id="viewOtherDevicesBtn" onAction="#otherDeviceView" style="-fx-padding: 2 5 2 5;" styleClass="Button" text="View Other Devices" wrapText="true">
+                                            <JFXButton fx:id="viewOtherDevicesBtn" onAction="#otherDeviceQuickAccess" style="-fx-padding: 2 5 2 5;" styleClass="Button" text="View Other Devices" wrapText="true">
                                                 <graphic>
                                                     <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                                         <Image url="@Images/icon-package.png" />

@@ -120,7 +120,7 @@ public abstract class Devices {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null); // Header text can be null
-        alert.setContentText("Device removed failed!");
+        alert.setContentText("Cannot remove: device is already assigned to another device.!");
 
         // Show the alert and wait for the user to close it
         alert.showAndWait();

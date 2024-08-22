@@ -39,6 +39,7 @@ public class OtherDevices extends Devices {
     private String Model;
     private String UserName;
     private String Status;
+    private String purchasedFrom;
 
     /*-----------------constructors for this class---------------*/
     private OtherDevices() {}
@@ -130,7 +131,12 @@ public class OtherDevices extends Devices {
     public int getTotalDev() {
         return totalDev;
     }
-
+    public String getPurchasedFrom() {
+        return purchasedFrom;
+    }
+    public void setPurchasedFrom(String purchasedFrom) {
+        this.purchasedFrom = purchasedFrom;
+    }
 
     //-------------------------------------------------------------------------
     private List<String> getDevicesList() {
@@ -175,6 +181,13 @@ public class OtherDevices extends Devices {
             throw new RuntimeException(e);
         }
     }
+    //filter other device categories for quick access
+    public List<String> loadForQuickAccess(){
+        List<String> quickAcessDeviceList =getDevicesList();
+        devicesLoaded = false;
+        return quickAcessDeviceList;
+    }
+
     //This method set the rows of the table and add to the Observable list
     private void setOtherDeviceTblDetails() {
         observableOtherDevices.clear();
@@ -232,7 +245,6 @@ public class OtherDevices extends Devices {
         }
 
     }
-
     public ObservableList<OtherDevices> getObservableOtherDevices() {
         if (!isTblRowLoaded()) {
             setOtherDeviceTblDetails();
@@ -269,7 +281,6 @@ public class OtherDevices extends Devices {
         //return desktops list as an array
         return otherDevices.toArray(new OtherDevices[0]);
     }
-
     public boolean createNewDevCat(String newDev) {
 
         String sql = "CREATE TABLE " + newDev + " (" +
@@ -287,5 +298,43 @@ public class OtherDevices extends Devices {
         }
     }
 
+    public  OtherDevices getOtherevice(String otherDevRegNum,String otherDeviceCat){
+        //pass query to the connection class
+        String sql = "SELECT * FROM "+otherDeviceCat +" WHERE "+otherDeviceCat+"RegNum=?";
+        try{
+            // get result set from connection class and auto closable
+            PreparedStatement ps = conn.getConnection().prepareStatement(sql);
+            ps.setString(1, otherDevRegNum);
+            ResultSet resultSet = ps.executeQuery();
+            // if result set have data load it
+            if (resultSet.next()) {
+                OtherDevices otherDevice = new OtherDevices();
+                otherDevice.setRegNum(resultSet.getString(otherDeviceCat+"RegNum"));
+                otherDevice.setModel(resultSet.getString("model"));
+                otherDevice.setStatus(resultSet.getString("status"));
+                otherDevice.setPurchasedFrom(resultSet.getString("purchasedFrom"));
+
+                return otherDevice;//add desktop to the desktops list
+            }
+        } catch (SQLException e) {
+            alerting(Alert.AlertType.WARNING,"Error Updating Device","An error occurred while updating the device.",e.getMessage());
+        }
+        //return null if not found
+        return null;
+    }
+
+    public boolean updateDevice(String otherDeviceCat,ArrayList<String> list){
+        //pass query to the connection class
+        String sql="UPDATE "+otherDeviceCat+" SET model=?,status=?,purchasedFrom=? WHERE "+otherDeviceCat+"RegNum=?";
+        return dbInteraction(sql,list,list.getLast());
+    }
+
+    public boolean insertDevice(String otherDeviceCat,ArrayList<String> list){
+        //pass query to the connection class
+        String sql="INSERT INTO "+otherDeviceCat+" ("+otherDeviceCat+"RegNum,model,status,purchasedFrom)" +
+                "VALUES (?,?,?,?)";
+        return dbInteraction(sql,list, list.getFirst());
+
+    }
 }
 

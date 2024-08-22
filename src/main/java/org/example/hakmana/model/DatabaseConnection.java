@@ -1,10 +1,15 @@
 package org.example.hakmana.model;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class DatabaseConnection {
     private static DatabaseConnection instance =null;
@@ -16,7 +21,7 @@ public class DatabaseConnection {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hakmanaedm", "root", "");
             System.out.println("Connection Successfully");
         } catch (ClassNotFoundException | SQLException e) {
-            sqlLogger.error(e.getMessage());
+            sqlLogger.error("connection is null");
             System.out.println("Connection failed");
             //Need to show this alert
             Alert alert=new Alert(Alert.AlertType.WARNING);
@@ -50,4 +55,38 @@ public class DatabaseConnection {
 
         return resultSet;
     }
+
+    public Optional<ButtonType> alerting(Alert.AlertType alertType, String title, String header, String content){
+        Alert alert=new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        return alert.showAndWait();
+    }
+
+    public ArrayList<String> quickAccessLoadDevRegnum(String selDevice){
+        String colName = selDevice+"RegNum";
+        if(selDevice== "Desktop"){
+            colName="DesRegNum";
+        }
+        if (selDevice== "Photocopy Machine") {
+            selDevice="PhotoCopyMachine";
+            colName=selDevice+"RegNum";
+        }
+        if (selDevice== "Projectors") {
+            selDevice="MultimediaProjector";
+            colName=selDevice+"RegNum";
+        }
+        String stringForDeviceRegNum="Select * From " +selDevice;
+        ArrayList<String> regNumbers=new ArrayList<>();
+        try(ResultSet rs = executeSt(stringForDeviceRegNum)){
+            while(rs.next()){
+                regNumbers.add(rs.getString(colName));
+            }
+        }catch (SQLException e){
+            alerting(Alert.AlertType.INFORMATION,"Unsuccessfully fetched data","","");
+        }
+        return regNumbers;
+    }
+
 }

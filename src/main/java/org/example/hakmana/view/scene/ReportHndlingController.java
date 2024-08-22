@@ -105,43 +105,43 @@ public class ReportHndlingController {
         File selectedFile = fileChooser.showSaveDialog(new Stage());
         if (selectedFile != null) {
             String filePath = selectedFile.getAbsolutePath();
-            try {
-                PdfWriter writer = new PdfWriter(new File(filePath));
-                PdfDocument pdf = new PdfDocument(writer);
-                Document document = new Document(pdf);
+           try {
+               PdfWriter writer = new PdfWriter(new File(filePath));
+               PdfDocument pdf = new PdfDocument(writer);
+               Document document = new Document(pdf);
 
-                // Add header
-                Paragraph header = new Paragraph(heading)
-                        .setTextAlignment(TextAlignment.CENTER)
-                        .setFontSize(16);
-                document.add(header);
+               // Add header
+               Paragraph header = new Paragraph(heading)
+                       .setTextAlignment(TextAlignment.CENTER)
+                       .setFontSize(16);
+               document.add(header);
 
-                // Create table
-                Table table = new Table(2);
-                table.setWidth(UnitValue.createPercentValue(100));
+               // Create table
+               Table table = new Table(2);
+               table.setWidth(UnitValue.createPercentValue(100));
 
-                // Add headers
-                table.addHeaderCell(new Cell().add(new Paragraph("Device Name")));
-                table.addHeaderCell(new Cell().add(new Paragraph("Devices Count")));
+               // Add headers
+               table.addHeaderCell(new Cell().add(new Paragraph("Device Name")));
+               table.addHeaderCell(new Cell().add(new Paragraph("Devices Count")));
 
-                AllDeviceDetails allDeviceDetails = new AllDeviceDetails();
-                for (AllDeviceDetails dev : allDeviceDetails.getDevicesCount(status)) {
-                    if (parseInt(dev.getDeviceCount()) != 0) {
-                        table.addCell(new Cell().add(new Paragraph(dev.getDeviceName())));
-                        table.addCell(new Cell().add(new Paragraph(dev.getDeviceCount())));
-                    }
-                }
+               AllDeviceDetails allDeviceDetails = new AllDeviceDetails();
+               for (AllDeviceDetails dev : allDeviceDetails.getDevicesCount(status)) {
+                   if (parseInt(dev.getDeviceCount()) != 0) {
+                       table.addCell(new Cell().add(new Paragraph(dev.getDeviceName())));
+                       table.addCell(new Cell().add(new Paragraph(dev.getDeviceCount())));
+                   }
+               }
 
-                // Add table to document
-                document.add(table);
-                document.close();
+               // Add table to document
+               document.add(table);
+               document.close();
 
-                System.out.println("PDF created successfully!");
-                openPdf(filePath);
-            } catch (IOException e) {
-                otherErrorLogger.error(e.getMessage());
-                System.err.println("Error creating PDF: " + e.getMessage());
-            }
+               System.out.println("PDF created successfully!");
+               openPdf(filePath);
+           } catch (IOException e) {
+               otherErrorLogger.error(e.getMessage());
+               System.err.println("Error creating PDF: " + e.getMessage());
+           }
         }
     }
 

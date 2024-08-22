@@ -105,7 +105,6 @@ public class OtherDevicesController implements Initializable {
     }
 
     public void ViewMoreButtonOnAction(ActionEvent actionEvent) {
-        DeviceMngmntSmmryScene.setDbSelector(devName);
         DeviceCategoryCardController deviceCategoryCardController=new DeviceCategoryCardController();
         deviceCategoryCardController.setDevName(devName);
         deviceCategoryCardController.setDashboardPathFinderControllerD(getDashboardPathFinderControllerD());
@@ -131,7 +130,7 @@ public class OtherDevicesController implements Initializable {
         tableViewRefresh();
     }
 
-    private void tableViewRefresh(){
+    public void tableViewRefresh(){
         otherDevicesDb.setTblRowLoaded(false);
         OtherDevices.setDevicesLoaded(false);
         otherDevicesDb.getObservableOtherDevices();

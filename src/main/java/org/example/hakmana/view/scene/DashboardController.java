@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -33,6 +34,7 @@ import org.example.hakmana.view.dialogBoxes.AddDeviceDialogController;
 import org.example.hakmana.view.dialogBoxes.AddDeviceUserDialogController;
 import org.example.hakmana.view.dialogBoxes.AddNoteDialogPane;
 import org.example.hakmana.view.dialogBoxes.LoadDeviceByRegNumDialogController;
+import org.w3c.dom.ls.LSOutput;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,6 +51,7 @@ import java.util.*;
 public class DashboardController extends Component implements Initializable {
     private static final Logger otherErrorLogger = (Logger) LogManager.getLogger(DashboardController.class);
     private static DashboardController instance = null;
+    private static Stage windowStage;
     @FXML
     public HeaderController headerController;//header custom component injector
     @FXML
@@ -97,14 +100,18 @@ public class DashboardController extends Component implements Initializable {
     private Label date1;
     private Button editButton;
     private Button updateButton;
-    private NoteTable noteInstance;
+    private NoteTable noteInstance=NoteTable.getInstance();
     private static final String LOG_FILE_PATH1 = "src/main/resources/logs/systemuser.log"; // Path to the log file
     private static final String LOG_FILE_PATH2 = "src/main/resources/logs/sql_exceptions.log"; // Path to the log file
     private static final String LOG_FILE_PATH3 = "src/main/resources/logs/other_exceptions.log"; // Path to the log file
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final int RETENTION_DAYS = 90; // Retention period in days
-
+    ObservableList<DashboardCardTableController> list1;
     private DashboardController() {
+    }
+
+    public NavPanelController getNavPanelController() {
+        return navPanelController;
     }
 
     public static DashboardController getInstance() {
@@ -120,8 +127,8 @@ public class DashboardController extends Component implements Initializable {
         cleanLogFile(LOG_FILE_PATH1, RETENTION_DAYS);
         cleanLogFile(LOG_FILE_PATH2, RETENTION_DAYS);
         cleanLogFile(LOG_FILE_PATH3, RETENTION_DAYS);
+
         //automaticaly upadate the cards
-        noteInstance = NoteTable.getInstance();
         //create the connections
         int count1;
         int count2;
@@ -169,24 +176,49 @@ public class DashboardController extends Component implements Initializable {
         pathFinderController.setNavPanelControllerPath(navPanelController);
         pathFinderController.setSearchBarVisible(false);
         pathFinderController.setBckBtnScene("dashboard");
-
-
+//
+//        Stage windowStage = (Stage) node.getScene().getWindow();
+//        windowStage.widthProperty().addListener(((observable, oldValue, newValue) -> {
+//            double oldStageWidth=oldValue.doubleValue();
+//            double newStageWidth=newValue.doubleValue();
+//            if(oldStageWidth>newStageWidth) {
+//                //116
+//                System.out.println(getBodyComponet().getWidth());
+//                //getBodyComponet().setFillWidth(true);
+//                System.out.println("collapse");
+//                System.out.println(getBodyComponet().getWidth());
+//            }
+//            else {
+//                System.out.println(getBodyComponet().getWidth());
+//                System.out.println("expand");
+//                // getBodyComponet().setFillWidth(true);
+//                System.out.println(getBodyComponet().getWidth());
+//            }
+//        }));
         //create the event listener to the navigation panel ToggleButton() method
-        navPanelController.collapseStateProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                expand();
-            } else {
-                collapse();
-            }
-        });
+//        navPanelController.collapseStateProperty().addListener((observable, oldValue, newValue) -> {
+//            if (newValue) {
+//                expand();
+//            } else {
+//                collapse();
+//            }
+//        });
         tableAdd();
         addDataOfDevice();
+
+
+    }
+
+    public VBox getBodyComponet() {
+        return bodyComponet;
+    }
+
+    public void setWindowStage(Stage windowStage) {
+        DashboardController.windowStage = windowStage;
 
     }
 
     public void dashboardCardUpdate(int count1, int count2, int count3, int count4, String tableValue, String regNum) {
-        noteInstance = NoteTable.getInstance();
-
         count1 = noteInstance.setPrValues(regNum, tableValue, "Active");
         String statement1 = Integer.toString(count1);
 
@@ -205,14 +237,13 @@ public class DashboardController extends Component implements Initializable {
     //add status of device to the table
     public void addDataOfDevice() {
         table2.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
-        noteInstance = NoteTable.getInstance();
-        ObservableList<DashboardCardTableController> list = noteInstance.getDeviceStatus(null, null, null, null, null);
+        list1= noteInstance.getDeviceStatus(null, null, null, null, null);
         activeCol.setCellValueFactory(new PropertyValueFactory<DashboardCardTableController, String>("activeDevices"));
         inActiveCol.setCellValueFactory(new PropertyValueFactory<DashboardCardTableController, String>("inactiveDevices"));
         repairingCol.setCellValueFactory(new PropertyValueFactory<DashboardCardTableController, String>("repairedDevices"));
         notAssignCol.setCellValueFactory(new PropertyValueFactory<DashboardCardTableController, String>("notAssignedDevices"));
         totalCol.setCellValueFactory(new PropertyValueFactory<DashboardCardTableController, String>("totalDevices"));
-        table2.setItems(list);
+        table2.setItems(list1);
     }
 
     public void tableAdd() {
@@ -231,7 +262,7 @@ public class DashboardController extends Component implements Initializable {
         noteInstance = NoteTable.getInstance();
         int selectedValue = table1.getSelectionModel().getSelectedIndex();
         System.out.println(selectedValue);
-        if (selectedValue >= 0) {
+        if(selectedValue >= 0) {
             Alert.AlertType type = Alert.AlertType.CONFIRMATION;
             Alert alert = new Alert(type, "");
             alert.initModality(Modality.APPLICATION_MODAL);
@@ -352,30 +383,29 @@ public class DashboardController extends Component implements Initializable {
     }
 
     /*+++++++++++++++++++++++++++++Animations++++++++++++++++++++++++++++++++++++++*/
-    private void Animation(double animStartPos, double animEndPos) {
-        //Animation object refernce
-        TranslateTransition bodyExpand = new TranslateTransition(Duration.millis(300), bodyComponet);
-        bodyExpand.setFromX(animStartPos);
-        bodyExpand.setToX(animEndPos); // expand VBox
-        bodyExpand.setAutoReverse(true);
-        bodyExpand.play();
-
-    }
-
-    public void expand() {
-        ///String cssRule = "-fx-min-width: 992px;";
-        Double W1 = bodyComponet.getWidth() + 244;
-        Animation(0, -244);
-        bodyComponet.setMinWidth(W1);
-        //bodyComponet.getStyleClass().add(cssRule);
-
-    }
-
-    public void collapse() {
-        Double W1 = bodyComponet.getWidth() - 244;
-        Animation(-244, 0);
-        bodyComponet.setMinWidth(W1);
-    }
+//    private void Animation(double animStartPos, double animEndPos) {
+//        //Animation object refernce
+//        TranslateTransition bodyExpand = new TranslateTransition(Duration.millis(300), bodyComponet);
+//        bodyExpand.setFromX(animStartPos);
+//        bodyExpand.setToX(animEndPos); // expand VBox
+//        bodyExpand.setAutoReverse(true);
+//        bodyExpand.play();
+//
+//    }
+//
+//    public void expand() {
+//        double W1 = bodyComponet.getWidth() + 244;
+//        Animation(0, -244);
+//        bodyComponet.setFillWidth(true);
+//        //bodyComponet.setMinWidth(W1);
+//    }
+//
+//    public void collapse() {
+//        double W1 = bodyComponet.getWidth() - 244;
+//        Animation(-244, 0);
+//        bodyComponet.setFillWidth(true);
+//        //bodyComponet.setMinWidth(W1);
+//    }
 
     /*+++++++++++++++++++++++++++++Device adding dialog pane++++++++++++++++++++++++++++++++++++++*/
     public void addDeviceBtnDialogOpen(ActionEvent event) throws IOException {
@@ -411,13 +441,39 @@ public class DashboardController extends Component implements Initializable {
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
     }
+
+    private void commonTaskInScene(LoadDeviceByRegNumDialogController loadDeviceByRegNumDialogController){
+        LoadDeviceByRegNumDialogController.setDashboardPathFinderController(pathFinderController);
+        LoadDeviceByRegNumDialogController.setDashboardBodyScrollpane(bodyScrollPane);
+        loadDeviceByRegNumDialogController.setCatSelected(false);
+        loadDeviceByRegNumDialogController.setRegNumSelected(false);
+    }
+    private int loadQuickScene(LoadDeviceByRegNumDialogController loadDeviceByRegNumDialogController, Dialog<ButtonType> dialog){
+        if(!(loadDeviceByRegNumDialogController.isCatSelected() && loadDeviceByRegNumDialogController.isRegNumSelected())){
+            dialog.showAndWait();
+            return 0;
+        }
+        loadDeviceByRegNumDialogController.loadDevDetailedscene();
+        return 1;
+    }
+    private void dialogButtons(LoadDeviceByRegNumDialogController loadDeviceByRegNumDialogController, Dialog<ButtonType> dialog){
+        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        if (clickedButton.isPresent() && clickedButton.get() == ButtonType.OK) {
+            loadQuickScene(loadDeviceByRegNumDialogController,dialog);
+        }
+        if (clickedButton.isPresent() && clickedButton.get() == ButtonType.CANCEL) {
+            dialog.close();
+        }
+    }
     /*+++++++++++++++++++++++++++++See other device dialog pane++++++++++++++++++++++++++++++++++++++*/
-    public void otherDeviceView(ActionEvent event) throws IOException {
+    public void otherDeviceQuickAccess(ActionEvent event) throws IOException {
         FXMLLoader loadDeviceByRegNumDiallogFxmlLoad = new FXMLLoader();
         loadDeviceByRegNumDiallogFxmlLoad.setLocation(org.example.hakmana.view.dialogBoxes.AddDeviceUserDialogController.class.getResource("LoadDeviceByRegNumDialog.fxml"));
 
         LoadDeviceByRegNumDialogController loadDeviceByRegNumDialogController=LoadDeviceByRegNumDialogController.getInstance();
         loadDeviceByRegNumDiallogFxmlLoad.setController(loadDeviceByRegNumDialogController);
+        loadDeviceByRegNumDialogController.setFromOtherDevice(true);
+        commonTaskInScene(loadDeviceByRegNumDialogController);
 
         DialogPane addDeviceDialogPane = loadDeviceByRegNumDiallogFxmlLoad.load();
 
@@ -425,16 +481,18 @@ public class DashboardController extends Component implements Initializable {
         dialog.setDialogPane(addDeviceDialogPane);
         dialog.setTitle("Other device details");
 
-        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        dialogButtons(loadDeviceByRegNumDialogController,dialog);
 
     }
-    /*+++++++++++++++++++++++++++++Show device++++++++++++++++++++++++++++++++++++++*/
-    public void showDevice(ActionEvent event) throws IOException {
+    /*+++++++++++++++++++++++++++++Show main device++++++++++++++++++++++++++++++++++++++*/
+    public void mainDeviceQuickAccess(ActionEvent event) throws IOException {
         FXMLLoader loadDeviceByRegNumDiallogFxmlLoad = new FXMLLoader();
         loadDeviceByRegNumDiallogFxmlLoad.setLocation(org.example.hakmana.view.dialogBoxes.AddDeviceUserDialogController.class.getResource("LoadDeviceByRegNumDialog.fxml"));
 
         LoadDeviceByRegNumDialogController loadDeviceByRegNumDialogController=LoadDeviceByRegNumDialogController.getInstance();
         loadDeviceByRegNumDiallogFxmlLoad.setController(loadDeviceByRegNumDialogController);
+        loadDeviceByRegNumDialogController.setFromOtherDevice(false);
+        commonTaskInScene(loadDeviceByRegNumDialogController);
 
         DialogPane addDeviceDialogPane = loadDeviceByRegNumDiallogFxmlLoad.load();
 
@@ -442,7 +500,7 @@ public class DashboardController extends Component implements Initializable {
         dialog.setDialogPane(addDeviceDialogPane);
         dialog.setTitle("Main device details");
 
-        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        dialogButtons(loadDeviceByRegNumDialogController,dialog);
 
     }
     //log cleaner function
@@ -457,9 +515,10 @@ public class DashboardController extends Component implements Initializable {
             while ((line = reader.readLine()) != null) {
                 // Assuming the date is at the beginning of the log entry in the format yyyy-MM-dd HH:mm:ss
                 if (!line.trim().isEmpty()) {
-                    String dateString = line.substring(0, 19);
-                    // Adjust based on your log format
-                    LocalDateTime logDate = LocalDateTime.parse(dateString, DATE_TIME_FORMATTER);
+                    String dateString = line.substring(0,21);
+                    String Dates[]=dateString.split(",",2);
+                    String curretntDate=Dates[0]+Dates[1].trim();
+                    LocalDateTime logDate = LocalDateTime.parse(curretntDate, DATE_TIME_FORMATTER);
 
                     if (!logDate.isBefore(thresholdDate)) {
                         filteredLines.add(line);

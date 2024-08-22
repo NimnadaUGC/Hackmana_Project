@@ -170,5 +170,41 @@ public class DeviceMngmntSmmryScene implements Initializable {
         this.searchText = searchText;
         updateUI(); // Update UI when searchText changes
     }
+    public void updateUI2(Devices[] dev2){
+        grid.getChildren().clear(); // Clear existing cards
+
+        // Fetch devices based on selected category
+        getDev();
+        rowCount = 1;
+        colCount = 0; // Reset column count
+
+        // Add the first component (e.g., add button)
+        AddDevButtonController addDevButtonController = new AddDevButtonController();
+        addDevButtonController.setDevCat(getDbSelector());
+
+        grid.add(addDevButtonController, (colCount % 3), rowCount); // Place at first row, first column
+
+        colCount++;
+
+        // Manage row and column overflow
+        if (colCount % 3 == 0) {
+            rowCount++;
+        }
+
+        // Iterate through devices and add info cards
+        for (Devices d : dev2) {
+            System.out.println(d.getRegNum());
+            if (isDevIdSelected == true) {
+                if (searchText.isEmpty() || d.getRegNum().toLowerCase().contains(searchText.toLowerCase())) {
+                    addDeviceInfoCard(d);
+                }
+            }
+            else {
+                if (searchText.isEmpty() || d.getUserName().toLowerCase().contains(searchText.toLowerCase())) {
+                    addDeviceInfoCard(d);
+                }
+            }
+        }
+    }
 
 }
